@@ -9,8 +9,12 @@ MAINTAINER satadru.basu@gmail.com
 #
 RUN mkdir -p /usr/local/app
 RUN mkdir -p /usr/local/app/logs
-VOLUME /tmp
-ARG JAR_FILE
+RUN chmod 755 -R /usr/local/app
 
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+# all subsequent commands of RUN/COPY/ADD will b eexecuted within this dir
+WORKDIR /usr/local/app/
+
+VOLUME /tmp
+
+COPY target/propertyservice-0.0.1-SNAPSHOT.jar /usr/local/app/prop_app.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/usr/local/app/prop_app.jar"]

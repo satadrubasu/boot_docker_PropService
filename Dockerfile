@@ -21,4 +21,4 @@ COPY target/propertyservice-0.0.1-SNAPSHOT.jar /usr/local/app/prop_app.jar
 # Note a command line param log.rootFolder passed the same folder is configured in log4j2-spring.xml
 # the log.rootFolder hasnt been used in any variable replacement as of yet
 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/usr/local/app/prop_app.jar","log.rootFolder=/mountedPropServiceLogs"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/usr/local/app/prop_app.jar"]

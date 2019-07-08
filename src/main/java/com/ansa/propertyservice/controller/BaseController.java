@@ -2,6 +2,8 @@ package com.ansa.propertyservice.controller;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,14 +22,17 @@ public class BaseController {
   
   @Value("${server.port}")
   private String serverPort;
-	
+
+  private final Logger        logger            = LoggerFactory.getLogger(this.getClass());
+  
   @RequestMapping("/")
   public String checkEndpoint() {
 	  InstanceInfo applicationInfo = applicationInfoManager.getInfo();
-	  return " Property Service is up in a container with--"
-	  		+ "\nContainer Hostname : " + applicationInfo.getHostName()
-	  		+ "\nContainer Port :" + serverPort
-	  		+ "\nContainer IP Address :" + applicationInfo.getIPAddr();
+	  logger.info("Property Service check health endpoint called.");
+	  return " Property Service is up in a container with --"
+	  		+ "\n   Container Hostname   : " + applicationInfo.getHostName()
+	  		+ "\n   Container Port       : " + serverPort
+	  		+ "\n   Container IP Address : " + applicationInfo.getIPAddr();
   }
   
   @RequestMapping("/all")
